@@ -1,0 +1,66 @@
+.abs-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+
+  }
+  .form_title {
+  color: darken($color: $primary, $amount: 20);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+}
+.form-check{
+  text-align: center;
+
+}
+
+.labels{
+  text-align: center;
+  font-size: 18px;
+}
+.input{
+  color: $dark-grey;
+  border: 10px;
+  border-bottom: 1px solid $light-grey;
+  font-size: 20px;
+  margin-bottom: 15px;
+  height: 40px;
+  width: 60%;
+  padding: 12px 30px;
+  margin: 20px 70px;
+  box-sizing: border-box;
+  border: 2px solid $dark-grey;
+  border-radius: 4px;
+  transition: border-bottom .3s ease;
+  
+}
+.buttom{
+  font-size:15px ;
+  padding: 12px 40px;
+}
+
+  .padre {
+    text-align: center;
+  }
+  
+  .hijo {
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+  }
+
+  .padre2 {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .hijo2 {
+    width: 600px;
+    height: 600px;
+  
+  }
