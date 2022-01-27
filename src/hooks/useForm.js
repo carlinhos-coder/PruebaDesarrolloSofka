@@ -10,7 +10,6 @@ export const useForm = (initialState = {}) => {
         setValues(newFormState);
     }
 
-
     const handleInputChange = ({ target }) => {
         if (target.value.length) {
             setvalidateInput(false)
@@ -24,6 +23,8 @@ export const useForm = (initialState = {}) => {
 
     }
 
-    return [values, handleInputChange, reset, validateInput];
+    console.log(reset)
+
+    return [values, handleInputChange, validateInput];
 
 }

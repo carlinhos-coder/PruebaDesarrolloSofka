@@ -6,7 +6,7 @@ import { getName } from '../../helper/getName';
 
 export const GrettingScreen = () => {
 
-    const [formValues, handleInputChange, reset, validateInput] = useForm();
+    const [formValues, handleInputChange, validateInput] = useForm();
     const [check, setCheck] = useState(true);
 
     const handleGreet = async (e) => {
@@ -68,19 +68,19 @@ export const GrettingScreen = () => {
                         />
                         {validateInput &&
                             <div className='auth__alert-error'>
-                                nombre requerido
+                                Debes ingresar un nombre
                             </div>
                         }
 
 
                         <div className="padre">
                             <div className="hijo">
-                                <input id="radio1" value="1" onChange={changeStatus} checked={check == 1 ? true : false} className="form-check-input" type="radio" />
+                                <input for='radio1' id="radio1" value="1" onChange={changeStatus} checked={check === "1" ? true : false} className="form-check-input" type="radio" />
                                 <label className="form-check">
                                     Inglés
                                 </label></div>
                             <div className="hijo">
-                                <input id="radio2" value="2" onChange={changeStatus} checked={check == 2 ? true : false} className="form-check-input" type="radio" />
+                                <input for='radio2' id="radio2" value="2" onChange={changeStatus} checked={check === "2" ? true : false} className="form-check-input" type="radio" />
                                 <label className="form-check">
                                     Español
                                 </label></div>
