@@ -52,11 +52,12 @@
 
 
 .auth__alert-error {
-    background-color: red;
+    background-color: rgb(139, 15, 15);
     border-radius: 5px;
     color: white;
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
-    padding: 5px
+    padding: 5px;
+    align-items:center ;
 }

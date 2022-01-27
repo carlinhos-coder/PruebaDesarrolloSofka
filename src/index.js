@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { SaludoApp } from './SaludoApp';
+import { GrettingApp } from './GrettingApp';
 import './styles/styles.scss'
 
 ReactDOM.render(
-  <SaludoApp />,
+  <GrettingApp />,
   document.getElementById('root')
 );

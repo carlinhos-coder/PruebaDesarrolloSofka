@@ -2,32 +2,43 @@ import React, { useState } from 'react';
 import { useForm } from '../../hooks/useForm';
 import { db } from '../../firebase/firebase-config';
 import Swal from 'sweetalert2';
+import { getName } from '../../helper/getName';
 
-
-export const SaludoScreen = () => {
+export const GrettingScreen = () => {
 
     const [formValues, handleInputChange] = useForm();
+    const [check, setCheck] = useState(true);
+    //const [inputCorrect, setinputCorrect] = useState(false);
 
-    const handleSaludar = async (e) => {
-        e.preventDefault();
+    const handleGreet = async (e) => {
+
+        e.preventDefault()
         console.log(formValues)
         await db.collection('saludo').doc().set(formValues)
-        Swal.fire(idiomasSaludo[check - 1] + ' ' + formValues.nombre)
+        validateName(formValues.nombre, idiomasSaludo)
+    }
 
+    const validateName = (name, language) => {
+        getName(name)
+            .then(res => {
+                res ? Swal.fire(language[check - 1] + ' ' + name) :
+                    Swal.fire("No existes en la base de datos, o ingresaste nombre incorrecto")
+            }
+            ).catch(() => Error)
     }
 
     const handleDespedir = (e) => {
         e.preventDefault();
-        console.log('nueva tarea')
-        Swal.fire(idiomasDespedida[check - 1] + ' ' + formValues.nombre)
-
+        validateName(formValues.nombre, idiomasDespedida)
     }
 
-    const handleNombre = (e) => {
+    const handleName = (e) => {
         e.preventDefault();
-        console.log('nueva tarea')
-        Swal.fire('Mi nombre es' + ' ' + formValues.nombre)
-
+        validateName(formValues.nombre, idiomasNombre)
+    }
+    const changeStatus = (e) => {
+        setCheck(e.target.value)
+        console.log(e.target.value);
     }
 
     const idiomasSaludo = [
@@ -38,14 +49,10 @@ export const SaludoScreen = () => {
         "See you later", "Hasta luego"
     ]
 
+    const idiomasNombre = [
+        "My name is", "Mi nombre es"
+    ]
 
-
-
-    const [check, setCheck] = useState(true);
-
-    const cambiarEstado = (e) => {
-        setCheck(e.target.value)
-    }
     return <div>
 
         <div className="padre2">
@@ -55,38 +62,39 @@ export const SaludoScreen = () => {
                     <form>
                         <h1 className='form_title'>Acá te saludamos por tu nombre</h1>
                         <label className='labels'>Nombre </label>
+
                         <input
                             type="text"
                             name="nombre"
                             className="mt-10 input"
                             autoComplete="off"
                             onChange={handleInputChange}
+                            required
                         />
 
                         <div className="padre">
-                            <div className="hijo"><input id="radio1" value="1" onChange={cambiarEstado} checked={check == 1 ? true : false} className="form-check-input" type="radio" />
-                                <label for="radio1" className="form-check">
+                            <div className="hijo">
+                                <input id="radio1" value="1" onChange={changeStatus} checked={check == 1 ? true : false} className="form-check-input" type="radio" />
+                                <label className="form-check">
                                     Inglés
                                 </label></div>
-                            <div className="hijo"><input id="radio2" value="2" onChange={cambiarEstado} checked={check == 2 ? true : false} className="form-check-input" type="radio" />
-                                <label for="radio2" className="form-check">
+                            <div className="hijo">
+                                <input id="radio2" value="2" onChange={changeStatus} checked={check == 2 ? true : false} className="form-check-input" type="radio" />
+                                <label className="form-check">
                                     Español
                                 </label></div>
                         </div>
 
                         <div className="padre">
-                            <div className="hijo"><button onClick={handleSaludar}
+                            <div className="hijo"><button onClick={handleGreet}
                                 className='btn btn-primary btn-block buttom'>Saludar</button></div>
-                            <div className="hijo"><button onClick={handleNombre} className='btn btn-primary btn-block buttom'>Nombre</button></div>
+                            <div className="hijo"><button onClick={handleName} className='btn btn-primary btn-block buttom'>Nombre</button></div>
                             <div className="hijo"><button onClick={handleDespedir} className='btn btn-primary btn-block buttom'>Despedir</button></div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
-
-
     </div >
 };
 
