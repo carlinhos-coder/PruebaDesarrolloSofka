@@ -6,14 +6,11 @@ import { getName } from '../../helper/getName';
 
 export const GrettingScreen = () => {
 
-    const [formValues, handleInputChange] = useForm();
+    const [formValues, handleInputChange, reset, validateInput] = useForm();
     const [check, setCheck] = useState(true);
-    //const [inputCorrect, setinputCorrect] = useState(false);
 
     const handleGreet = async (e) => {
-
         e.preventDefault()
-        console.log(formValues)
         await db.collection('saludo').doc().set(formValues)
         validateName(formValues.nombre, idiomasSaludo)
     }
@@ -22,7 +19,7 @@ export const GrettingScreen = () => {
         getName(name)
             .then(res => {
                 res ? Swal.fire(language[check - 1] + ' ' + name) :
-                    Swal.fire("No existes en la base de datos, o ingresaste nombre incorrecto")
+                    Swal.fire("No existes en la base de datos")
             }
             ).catch(() => Error)
     }
@@ -38,7 +35,6 @@ export const GrettingScreen = () => {
     }
     const changeStatus = (e) => {
         setCheck(e.target.value)
-        console.log(e.target.value);
     }
 
     const idiomasSaludo = [
@@ -52,7 +48,6 @@ export const GrettingScreen = () => {
     const idiomasNombre = [
         "My name is", "Mi nombre es"
     ]
-
     return <div>
 
         <div className="padre2">
@@ -69,8 +64,14 @@ export const GrettingScreen = () => {
                             className="mt-10 input"
                             autoComplete="off"
                             onChange={handleInputChange}
-                            required
+
                         />
+                        {validateInput &&
+                            <div className='auth__alert-error'>
+                                nombre requerido
+                            </div>
+                        }
+
 
                         <div className="padre">
                             <div className="hijo">
@@ -86,10 +87,10 @@ export const GrettingScreen = () => {
                         </div>
 
                         <div className="padre">
-                            <div className="hijo"><button onClick={handleGreet}
+                            <div className="hijo"><button disabled={validateInput} onClick={handleGreet}
                                 className='btn btn-primary btn-block buttom'>Saludar</button></div>
-                            <div className="hijo"><button onClick={handleName} className='btn btn-primary btn-block buttom'>Nombre</button></div>
-                            <div className="hijo"><button onClick={handleDespedir} className='btn btn-primary btn-block buttom'>Despedir</button></div>
+                            <div className="hijo"><button disabled={validateInput} onClick={handleName} className='btn btn-primary btn-block buttom'>Nombre</button></div>
+                            <div className="hijo"><button disabled={validateInput} onClick={handleDespedir} className='btn btn-primary btn-block buttom'>Despedir</button></div>
                         </div>
                     </form>
                 </div>
