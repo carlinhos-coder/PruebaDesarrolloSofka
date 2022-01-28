@@ -10,17 +10,18 @@ export const useForm = (initialState = {}) => {
         setValues({
             nombre: ""
         });
+        setvalidateInput(true)
     }
 
     const handleInputChange = ({ target }) => {
-        if (target.value.length) {
+        if (target.value.length && target.value !== "") {
             setvalidateInput(false)
         } else {
             setvalidateInput(true)
         }
         setValues({
             ...values,
-            [target.name]: target.value
+            nombre: target.value
         });
 
     }

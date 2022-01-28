@@ -13,6 +13,7 @@ export const GrettingScreen = () => {
         e.preventDefault()
         await db.collection('saludo').doc().set(formValues)
         validateName(formValues.nombre, idiomasSaludo)
+        reset()
     }
 
     const validateName = (name, language) => {
@@ -34,6 +35,7 @@ export const GrettingScreen = () => {
     const handleName = (e) => {
         e.preventDefault();
         validateName(formValues.nombre, idiomasNombre)
+        reset()
     }
     const changeStatus = (e) => {
         setCheck(e.target.value)
@@ -66,7 +68,7 @@ export const GrettingScreen = () => {
                             className="mt-10 input"
                             autoComplete="off"
                             onChange={handleInputChange}
-                            value={formValues.nombre}
+                            value={formValues?.nombre ? formValues?.nombre : ""}
 
                         />
                         {validateInput &&
