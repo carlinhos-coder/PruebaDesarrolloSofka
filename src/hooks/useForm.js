@@ -6,8 +6,10 @@ export const useForm = (initialState = {}) => {
     const [values, setValues] = useState(initialState);
     const [validateInput, setvalidateInput] = useState(true);
 
-    const reset = (newFormState = initialState) => {
-        setValues(newFormState);
+    const reset = () => {
+        setValues({
+            nombre: ""
+        });
     }
 
     const handleInputChange = ({ target }) => {
@@ -23,8 +25,6 @@ export const useForm = (initialState = {}) => {
 
     }
 
-    console.log(reset)
-
-    return [values, handleInputChange, validateInput];
+    return [values, handleInputChange, reset, validateInput];
 
 }

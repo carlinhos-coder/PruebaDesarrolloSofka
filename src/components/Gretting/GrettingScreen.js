@@ -6,7 +6,7 @@ import { getName } from '../../helper/getName';
 
 export const GrettingScreen = () => {
 
-    const [formValues, handleInputChange, validateInput] = useForm();
+    const [formValues, handleInputChange, reset, validateInput] = useForm();
     const [check, setCheck] = useState("1");
 
     const handleGreet = async (e) => {
@@ -28,6 +28,7 @@ export const GrettingScreen = () => {
     const handleDespedir = (e) => {
         e.preventDefault();
         validateName(formValues.nombre, idiomasDespedida)
+        reset()
     }
 
     const handleName = (e) => {
@@ -65,6 +66,7 @@ export const GrettingScreen = () => {
                             className="mt-10 input"
                             autoComplete="off"
                             onChange={handleInputChange}
+                            value={formValues.nombre}
 
                         />
                         {validateInput &&
