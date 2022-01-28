@@ -21,6 +21,7 @@ export const GrettingScreen = () => {
                 res ? Swal.fire(language[check - 1] + ' ' + name) :
                     Swal.fire("No existes en la base de datos")
             }
+
             ).catch(() => Error)
     }
 
@@ -68,19 +69,19 @@ export const GrettingScreen = () => {
                         />
                         {validateInput &&
                             <div className='auth__alert-error'>
-                                Debes ingresar un nombre
+                                Debes ingresar nombre
                             </div>
                         }
 
 
                         <div className="padre">
                             <div className="hijo">
-                                <input for='radio1' id="radio1" value="1" onChange={changeStatus} checked={check === "1" ? true : false} className="form-check-input" type="radio" />
+                                <input id="radio1" value={1} onChange={changeStatus} checked={check == 1 ? true : false} className="form-check-input" type="radio" />
                                 <label className="form-check">
                                     Inglés
                                 </label></div>
                             <div className="hijo">
-                                <input for='radio2' id="radio2" value="2" onChange={changeStatus} checked={check === "2" ? true : false} className="form-check-input" type="radio" />
+                                <input id="radio2" value={2} onChange={changeStatus} checked={check == 2 ? true : false} className="form-check-input" type="radio" />
                                 <label className="form-check">
                                     Español
                                 </label></div>
