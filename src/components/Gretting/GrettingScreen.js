@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from '../../hooks/useForm';
 import { db } from '../../firebase/firebase-config';
 import Swal from 'sweetalert2';
-import { getName } from '../../helper/getName';
+import { getName, setName } from '../../helper/fetchApi';
 
 export const GrettingScreen = () => {
 
@@ -16,11 +16,27 @@ export const GrettingScreen = () => {
         reset()
     }
 
+    const handleAddBD = async (e) => {
+        e.preventDefault()
+        saveName(formValues.nombre)
+        reset()
+    }
+
     const validateName = (name, language) => {
         getName(name)
             .then(res => {
                 res ? Swal.fire(language[check - 1] + ' ' + name) :
                     Swal.fire("No existes en la base de datos")
+            }
+
+            ).catch(() => Error)
+    }
+
+    const saveName = (name) => {
+        setName(name)
+            .then(res => {
+                res ? Swal.fire("Se guardó correctamente") :
+                    Swal.fire("No se guardó correctamente")
             }
 
             ).catch(() => Error)
@@ -60,6 +76,7 @@ export const GrettingScreen = () => {
 
                     <form>
                         <h1 className='form_title'>Acá te saludamos por tu nombre</h1>
+
                         <label className='labels'>Nombre </label>
 
                         <input
@@ -76,6 +93,7 @@ export const GrettingScreen = () => {
                                 Debes ingresar nombre
                             </div>
                         }
+
 
 
                         <div className="padre">
@@ -96,6 +114,7 @@ export const GrettingScreen = () => {
                                 className='btn btn-primary btn-block buttom'>Saludar</button></div>
                             <div className="hijo"><button disabled={validateInput} onClick={handleName} className='btn btn-primary btn-block buttom'>Nombre</button></div>
                             <div className="hijo"><button disabled={validateInput} onClick={handleDespedir} className='btn btn-primary btn-block buttom'>Despedir</button></div>
+                            <div className="hijo"><button disabled={validateInput} onClick={handleAddBD} className='btn btn-primary btn-block buttom'>Guardar</button></div>
                         </div>
                     </form>
                 </div>
