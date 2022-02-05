@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { deleteName, updateName } from '../../helper/fetchApi';
 import Swal from 'sweetalert2';
 
@@ -31,7 +30,7 @@ export const GetNames = ({ names, setNames, setChangeComponent }) => {
 
     const edit = () => {
         var dataNueva = names;
-        dataNueva.map(name => {
+        dataNueva.forEach(name => {
             if (name.id === nameSelected.id) {
                 name.estado = nameSelected.estado;
                 name.nombre = nameSelected.nombre;
