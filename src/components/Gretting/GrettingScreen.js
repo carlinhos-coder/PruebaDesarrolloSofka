@@ -78,15 +78,15 @@ export const GrettingScreen = () => {
     }
 
     const idiomasSaludo = [
-        "Hello", "Hola"
+        "Hello:", "Hola:"
     ]
 
     const idiomasDespedida = [
-        "See you later", "Hasta luego"
+        "See you later:", "Hasta luego:"
     ]
 
     const idiomasNombre = [
-        "My name is", "Mi nombre es"
+        "My name is:", "Mi nombre es:"
     ]
     return <div>
         {changeComponent &&
