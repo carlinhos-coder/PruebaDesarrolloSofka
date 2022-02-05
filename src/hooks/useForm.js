@@ -21,7 +21,7 @@ export const useForm = (initialState = {}) => {
         }
         setValues({
             ...values,
-            nombre: target.value
+            nombre: target.value,
         });
 
     }
