@@ -64,3 +64,27 @@
     height: 600px;
   
   }
+
+  .fatherLoading {
+    height: 100vh;
+    text-align: center;
+    position: relative;
+  }
+  
+  .sonLoading {
+    position: absolute;
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+  }
+
+  .spinner{
+    width: 100px ;
+    height: 100px ;
+    border: 10px solid currentColor ;
+    border-right-color: transparent ;
+  }

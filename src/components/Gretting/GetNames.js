@@ -4,7 +4,7 @@ import { deleteName, updateName } from '../../helper/fetchApi';
 import Swal from 'sweetalert2';
 
 
-export const GetNames = ({ names, setNames, setChangeComponent }) => {
+export const GetNames = ({ names, setNames, setChangeComponent, setloading }) => {
 
     const [modalEdit, setModalEdit] = useState(false);
     const [modalDelete, setModalDelete] = useState(false);
@@ -32,23 +32,26 @@ export const GetNames = ({ names, setNames, setChangeComponent }) => {
         var dataNueva = names;
         dataNueva.forEach(name => {
             if (name.id === nameSelected.id) {
-                name.estado = nameSelected.estado;
                 name.nombre = nameSelected.nombre;
+                name.estado = nameSelected.estado;
             }
         });
-
+        console.log(nameSelected);
+        setloading(true)
         updateName(nameSelected)
             .then(res => res.json())
             .then(data => data.status === 400 ? Swal.fire("No se actualizó correctamente") :
-                Swal.fire("Se actualizó correctamente")
-            )
+                setloading(false), Swal.fire("Se actualizó correctamente"))
+
         setModalEdit(false);
+
     }
 
     const deleteBd = () => {
+        setloading(true)
         deleteName(nameSelected)
             .then(res => res.status === 400 ? Swal.fire("No se borró correctamente") :
-                Swal.fire("Se borró correctamente")
+                setloading(false), Swal.fire("Se borró correctamente")
             )
         setNames(names.filter(name => name.id !== nameSelected.id));
         setModalDelete(false);
@@ -143,14 +146,12 @@ export const GetNames = ({ names, setNames, setChangeComponent }) => {
                     Sí
                 </button>
                 <button
-                    className="btn btn-secondary"
+                    className="btn btn-primary"
                     onClick={() => setModalDelete(false)}
                 >
                     No
                 </button>
             </ModalFooter>
         </Modal>
-
-
     </div>;
 };

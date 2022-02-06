@@ -1,5 +1,4 @@
 
-
 export const getName = async (nombre) => {
     const url = `https://carlos-spring-pruebas.herokuapp.com/api/usuarios/validateName?name=${encodeURI(nombre)}`;
     const resp = await fetch(url).catch(Error)
@@ -22,7 +21,6 @@ export const setName = async (nombre) => {
 
 export const updateName = async (dataNueva) => {
     const { id, estado, nombre } = dataNueva;
-    console.log(dataNueva, "esta es la data nueva");
     const url = `https://carlos-spring-pruebas.herokuapp.com/api/usuarios/update`;
     let params = { "nombre": nombre, "estado": estado, "id": id };
     const response = await fetch(url, {

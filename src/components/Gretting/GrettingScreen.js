@@ -4,8 +4,7 @@ import { db } from '../../firebase/firebase-config';
 import Swal from 'sweetalert2';
 import { getName, getNames, setName } from '../../helper/fetchApi';
 import { GetNames } from './GetNames';
-
-
+import { Loading } from './Loading';
 
 export const GrettingScreen = () => {
 
@@ -13,6 +12,11 @@ export const GrettingScreen = () => {
     const [check, setCheck] = useState("1");
     const [names, setNames] = useState([])
     const [changeComponent, setChangeComponent] = useState(true)
+    const [loading, setloading] = useState(false);
+
+    if (loading) {
+        return <Loading />
+    }
 
     const alphabeticComparator = (a, b) =>
         a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
@@ -31,22 +35,21 @@ export const GrettingScreen = () => {
     }
 
     const validateName = (name, language) => {
+        setloading(true)
         getName(name)
-            .then(res => {
-                res ? Swal.fire(language[check - 1] + ' ' + name) :
+            .then(res =>
+                res ? (setloading(false), Swal.fire(language[check - 1] + ' ' + name)) :
                     Swal.fire("No existes en la base de datos")
-            }
 
             ).catch(() => Error)
     }
 
     const saveName = (name) => {
+        setloading(true)
         setName(name)
-            .then(res => {
-                res ? Swal.fire("Se guardó correctamente") :
+            .then(res =>
+                res ? (setloading(false), Swal.fire("Se guardó correctamente")) :
                     Swal.fire("No se guardó correctamente")
-            }
-
             ).catch(() => Error)
     }
 
@@ -67,12 +70,11 @@ export const GrettingScreen = () => {
 
     const handleGetNames = (e) => {
         e.preventDefault();
+        setloading(true)
         getNames()
-            .then(resp =>
-                resp.json()
-            )
+            .then(resp => resp.json())
             .then(data => setNames(data.sort(alphabeticComparator)));
-
+        setloading(false)
         setChangeComponent(false)
 
     }
@@ -143,7 +145,7 @@ export const GrettingScreen = () => {
             </div>
         }
         {!changeComponent &&
-            <GetNames names={names} setNames={setNames} setChangeComponent={setChangeComponent} />
+            <GetNames names={names} setNames={setNames} setChangeComponent={setChangeComponent} setloading={setloading} />
         }
 
     </div >
