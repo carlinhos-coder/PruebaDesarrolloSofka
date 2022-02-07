@@ -39,8 +39,7 @@ export const GrettingScreen = () => {
         getName(name)
             .then(res =>
                 res ? (setloading(false), Swal.fire(language[check - 1] + ' ' + name)) :
-                    Swal.fire("No existes en la base de datos")
-
+                    (Swal.fire("No existes en la base de datos"), setloading(false))
             ).catch(() => Error)
     }
 
@@ -77,8 +76,8 @@ export const GrettingScreen = () => {
         setloading(false)
         setChangeComponent(false)
 
-    }
 
+    }
     const idiomasSaludo = [
         "Hello:", "Hola:"
     ]

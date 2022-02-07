@@ -22,7 +22,7 @@ export const setName = async (nombre) => {
 export const updateName = async (dataNueva) => {
     const { id, estado, nombre } = dataNueva;
     const url = `https://carlos-spring-pruebas.herokuapp.com/api/usuarios/update`;
-    let params = { "nombre": nombre, "estado": estado, "id": id };
+    const params = { "id": id, "nombre": nombre, "estado": estado };
     const response = await fetch(url, {
         method: 'POST',
         headers: {

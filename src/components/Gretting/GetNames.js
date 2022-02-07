@@ -35,6 +35,7 @@ export const GetNames = ({ names, setNames, setChangeComponent, setloading }) =>
                 name.nombre = nameSelected.nombre;
                 name.estado = nameSelected.estado;
             }
+            console.log(nameSelected);
         });
         console.log(nameSelected);
         setloading(true)
@@ -42,7 +43,6 @@ export const GetNames = ({ names, setNames, setChangeComponent, setloading }) =>
             .then(res => res.json())
             .then(data => data.status === 400 ? Swal.fire("No se actualizó correctamente") :
                 setloading(false), Swal.fire("Se actualizó correctamente"))
-
         setModalEdit(false);
 
     }
