@@ -13,15 +13,20 @@ export const GetNames = ({ names, setNames, setChangeComponent, setloading }) =>
         nombre: '',
         estado: ''
     });
+    const [check, setCheck] = useState("1");
+
+    const modifyStatus = (e) => {
+        setCheck(e.target.value)
+    }
 
     const selectName = (elemento, caso) => {
+        console.log(elemento);
         setNameSelected(elemento);
         (caso === 'Editar') ? setModalEdit(true) : setModalDelete(true)
     }
 
     const handleChange = e => {
         const { name, value } = e.target;
-
         setNameSelected((prevState) => ({
             ...prevState,
             [name]: value,
@@ -33,11 +38,13 @@ export const GetNames = ({ names, setNames, setChangeComponent, setloading }) =>
         dataNueva.forEach(name => {
             if (name.id === nameSelected.id) {
                 name.nombre = nameSelected.nombre;
-                name.estado = nameSelected.estado;
+                if (check === "2") {
+                    nameSelected.estado = false
+                } else if (check === "1") {
+                    nameSelected.estado = true;
+                }
             }
-            console.log(nameSelected);
         });
-        console.log(nameSelected);
         setloading(true)
         updateName(nameSelected)
             .then(res => res.json())
@@ -113,14 +120,18 @@ export const GetNames = ({ names, setNames, setChangeComponent, setloading }) =>
                     />
                     <br />
 
-                    <label>Estado</label>
-                    <input
-                        className="form-control"
-                        type="text"
-                        name="estado"
-                        value={nameSelected && nameSelected.estado}
-                        onChange={handleChange}
-                    />
+                    <label >Estado</label>
+                    <br />
+                    <div className="hijo">
+                        <input id="radio1" value="1" onChange={modifyStatus} checked={check === "1" ? true : false} className="form-check-input" type="radio" />
+                        <label className="form-check">
+                            Activo
+                        </label></div>
+                    <div className="hijo">
+                        <input id="radio2" value="2" onChange={modifyStatus} checked={check === "2" ? true : false} className="form-check-input" type="radio" />
+                        <label className="form-check">
+                            Inactivo
+                        </label></div>
                     <br />
                 </div>
             </ModalBody>
