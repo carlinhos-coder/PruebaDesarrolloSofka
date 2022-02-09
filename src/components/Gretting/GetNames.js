@@ -17,7 +17,6 @@ export const GetNames = ({ names, setNames, setChangeComponent, setloading }) =>
         estado: ''
     });
     const [check, setCheck] = useState("1");
-    const [usuarios, setUsuarios] = useState([]);
     const [tablaUsuarios, setTablaUsuarios] = useState([]);
     const [busqueda, setBusqueda] = useState("");
 
@@ -26,7 +25,6 @@ export const GetNames = ({ names, setNames, setChangeComponent, setloading }) =>
     }
 
     const selectName = (elemento, caso) => {
-        console.log(elemento);
         setNameSelected(elemento);
         (caso === 'Editar') ? setModalEdit(true) : setModalDelete(true)
     }
@@ -44,18 +42,15 @@ export const GetNames = ({ names, setNames, setChangeComponent, setloading }) =>
     }
 
     const filtrar = (terminoBusqueda) => {
-        var resultadosBusqueda = tablaUsuarios.filter((elemento) => {
-            if (elemento.nombre.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())) {
-                console.log(elemento);
-                return elemento;
+        var resultadosBusqueda = names.filter((elemento) =>
+            elemento.nombre.toLowerCase().includes(terminoBusqueda.toLowerCase())
+        );
+        setTablaUsuarios(resultadosBusqueda);
 
-            }
-        });
-        setNames(resultadosBusqueda);
     }
     useEffect(() => {
         setTablaUsuarios(names);
-    }, [])
+    }, [names])
 
     const edit = () => {
         var dataNueva = names;
@@ -69,7 +64,6 @@ export const GetNames = ({ names, setNames, setChangeComponent, setloading }) =>
                 }
             }
         });
-        console.log(nameSelected);
         setloading(true)
         updateName(nameSelected)
             .then(res => res.json())
@@ -115,7 +109,7 @@ export const GetNames = ({ names, setNames, setChangeComponent, setloading }) =>
                 </tr>
             </thead>
             <tbody>
-                {names.map(element => (
+                {tablaUsuarios.map(element => (
                     <tr key={element.id}>
                         <td>{element.id}</td>
                         <td>{element.nombre}</td>
