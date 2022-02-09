@@ -72,8 +72,10 @@ export const GrettingScreen = () => {
         setloading(true)
         getNames()
             .then(resp => resp.json())
-            .then(data => setNames(data.sort(alphabeticComparator)));
-        setloading(false)
+            .then(data => {
+                setNames(data.sort(alphabeticComparator))
+                setloading(false)
+            });
         setChangeComponent(false)
 
 
@@ -132,11 +134,11 @@ export const GrettingScreen = () => {
 
                             <div className="padre">
                                 <div className="hijo"><button disabled={validateInput} onClick={handleGreet}
-                                    className='btn btn-primary btn-block buttom'>Saludar</button></div>
-                                <div className="hijo"><button disabled={validateInput} onClick={handleName} className='btn btn-primary btn-block buttom'>Nombre</button></div>
-                                <div className="hijo"><button disabled={validateInput} onClick={handleDespedir} className='btn btn-primary btn-block buttom'>Despedir</button></div>
-                                <div className="hijo"><button disabled={validateInput} onClick={handleAddBD} className='btn btn-primary btn-block buttom'>Guardar</button></div>
-                                <div className="hijo"><button onClick={handleGetNames} className='btn btn-primary btn-block buttom'>Consultar</button></div>
+                                    className='btns btn-primary btn-block buttom'>Saludar</button></div>
+                                <div className="hijo"><button disabled={validateInput} onClick={handleName} className='btns btn-primary btn-block buttom'>Nombre</button></div>
+                                <div className="hijo"><button disabled={validateInput} onClick={handleDespedir} className='btns btn-primary btn-block buttom'>Despedir</button></div>
+                                <div className="hijo"><button disabled={validateInput} onClick={handleAddBD} className='btns btn-primary btn-block buttom'>Guardar</button></div>
+                                <div className="hijo"><button onClick={handleGetNames} className='btns btn-primary btn-block buttom'>Consultar</button></div>
                             </div>
                         </form>
                     </div>

@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
 import { deleteName, updateName } from '../../helper/fetchApi';
+import "bootstrap/dist/css/bootstrap.min.css";
 import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 
 export const GetNames = ({ names, setNames, setChangeComponent, setloading }) => {
@@ -14,6 +17,9 @@ export const GetNames = ({ names, setNames, setChangeComponent, setloading }) =>
         estado: ''
     });
     const [check, setCheck] = useState("1");
+    const [usuarios, setUsuarios] = useState([]);
+    const [tablaUsuarios, setTablaUsuarios] = useState([]);
+    const [busqueda, setBusqueda] = useState("");
 
     const modifyStatus = (e) => {
         setCheck(e.target.value)
@@ -32,6 +38,24 @@ export const GetNames = ({ names, setNames, setChangeComponent, setloading }) =>
             [name]: value,
         }));
     }
+    const handleFilter = e => {
+        setBusqueda(e.target.value);
+        filtrar(e.target.value);
+    }
+
+    const filtrar = (terminoBusqueda) => {
+        var resultadosBusqueda = tablaUsuarios.filter((elemento) => {
+            if (elemento.nombre.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())) {
+                console.log(elemento);
+                return elemento;
+
+            }
+        });
+        setNames(resultadosBusqueda);
+    }
+    useEffect(() => {
+        setTablaUsuarios(names);
+    }, [])
 
     const edit = () => {
         var dataNueva = names;
@@ -39,12 +63,13 @@ export const GetNames = ({ names, setNames, setChangeComponent, setloading }) =>
             if (name.id === nameSelected.id) {
                 name.nombre = nameSelected.nombre;
                 if (check === "2") {
-                    nameSelected.estado = false
+                    name.estado = false
                 } else if (check === "1") {
-                    nameSelected.estado = true;
+                    name.estado = true;
                 }
             }
         });
+        console.log(nameSelected);
         setloading(true)
         updateName(nameSelected)
             .then(res => res.json())
@@ -64,12 +89,23 @@ export const GetNames = ({ names, setNames, setChangeComponent, setloading }) =>
         setModalDelete(false);
     }
 
-    return <div>
+    return <div className='App'>
+        <div className="containerInput">
+            <input
+                className="form-control inputBuscar"
+                value={busqueda}
+                placeholder="Búsqueda por Nombre"
+                onChange={handleFilter}
+            />
+            <button className="btn btn-success">
+                <FontAwesomeIcon icon={faSearch} />
+            </button>
+        </div>
 
         <button onClick={() => setChangeComponent(true)} >
             Volver
         </button>
-        <table className="table table-bordered">
+        <table className="table table-sm table-bordered">
             <thead>
                 <tr>
                     <th>ID</th>
