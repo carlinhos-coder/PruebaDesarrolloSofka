@@ -24,7 +24,6 @@ export const GrettingScreen = () => {
 
     const handleGreet = async (e) => {
         e.preventDefault()
-        await db.collection('saludo').doc().set(formValues)
         validateName(formValues.nombre, idiomasSaludo)
         reset()
     }
