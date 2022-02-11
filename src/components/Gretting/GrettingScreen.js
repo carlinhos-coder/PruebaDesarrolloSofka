@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useForm } from '../../hooks/useForm';
-import { db } from '../../firebase/firebase-config';
 import Swal from 'sweetalert2';
 import { getName, getNames, setName } from '../../helper/fetchApi';
 import { GetNames } from './GetNames';
