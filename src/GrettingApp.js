@@ -1,8 +1,15 @@
 import React from 'react';
-import { GrettingScreen } from './components/Gretting/GrettingScreen';
+import { Provider } from 'react-redux';
+import { AppRouter } from './routers/AppRouter';
+import { store } from './store/store'
+import './styles/styles.scss'
+
 
 export const GrettingApp = () => {
-    return <div>
-        <GrettingScreen />
-    </div>;
+    return (
+        <Provider store={store}>
+            <AppRouter />
+        </Provider>
+
+    )
 };

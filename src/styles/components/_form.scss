@@ -1,92 +1,136 @@
 .abs-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-
-  }
-  .form_title {
-  color: darken($color: $primary, $amount: 20);
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
 }
-.form-check{
-  text-align: center;
-
+.form_title {
+	color: darken($color: $primary, $amount: 20);
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+.form-check {
+	text-align: center;
 }
 
-.labels{
-  text-align: center;
-  font-size: 18px;
+.labels {
+	text-align: center;
+	font-size: 18px;
 }
-.input{
-  color: $dark-grey;
-  border: 10px;
-  border-bottom: 1px solid $light-grey;
-  font-size: 20px;
-  margin-bottom: 15px;
-  height: 40px;
-  width: 60%;
-  padding: 12px 30px;
-  margin: 20px 70px;
-  box-sizing: border-box;
-  border: 2px solid $dark-grey;
-  border-radius: 4px;
-  transition: border-bottom .3s ease;
-  
+.input {
+	color: $dark-grey;
+	border: 10px;
+	border-bottom: 1px solid $light-grey;
+	font-size: 20px;
+	margin-bottom: 15px;
+	height: 40px;
+	width: 60%;
+	padding: 12px 30px;
+	margin: 20px 70px;
+	box-sizing: border-box;
+	border: 2px solid $dark-grey;
+	border-radius: 4px;
+	transition: border-bottom 0.3s ease;
 }
-.buttom{
-  font-size:15px ;
-  padding: 12px 40px;
+.buttom {
+	font-size: 15px;
+	padding: 12px 40px;
 }
 
-  .padre {
-    text-align: center;
-  }
-  
-  .hijo {
-    padding: 10px;
-    margin: 10px;
-    display: inline-block;
-  }
+.padre {
+	text-align: center;
+}
 
-  .padre2 {
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .hijo2 {
-    width: 600px;
-    height: 600px;
-  
-  }
+.hijo {
+	padding: 10px;
+	margin: 10px;
+	display: inline-block;
+}
 
-  .fatherLoading {
-    height: 100vh;
-    text-align: center;
-    position: relative;
-  }
-  
-  .sonLoading {
-    position: absolute;
-    padding: 10px;
-    margin: 10px;
-    display: inline-block;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
-  }
+.padre2 {
+	height: 400px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
-  .spinner{
-    width: 100px ;
-    height: 100px ;
-    border: 10px solid currentColor ;
-    border-right-color: transparent ;
-  }
+.hijo2 {
+	width: 600px;
+	height: 600px;
+}
 
+.fatherLoading {
+	height: 100vh;
+	text-align: center;
+	position: relative;
+}
 
+.sonLoading {
+	position: absolute;
+	padding: 10px;
+	margin: 10px;
+	display: inline-block;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.spinner {
+	width: 100px;
+	height: 100px;
+	border: 10px solid currentColor;
+	border-right-color: transparent;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Oswald:400);
+
+.navigation {
+	width: 100%;
+	background-color: black;
+}
+
+img {
+	width: 25px;
+	border-radius: 50px;
+	float: left;
+}
+
+.logout {
+	font-size: 0.8em;
+	font-family: "Oswald", sans-serif;
+	position: relative;
+	right: -18px;
+	bottom: -4px;
+	overflow: hidden;
+	letter-spacing: 3px;
+	opacity: 0;
+	transition: opacity 0.45s;
+	-webkit-transition: opacity 0.35s;
+}
+
+.button {
+	text-decoration: none;
+	float: right;
+	padding: 12px;
+	margin: 15px;
+	color: white;
+	width: 25px;
+	background-color: black;
+	transition: width 0.35s;
+	-webkit-transition: width 0.35s;
+	overflow: hidden;
+}
+
+a:hover {
+	width: 100px;
+}
+
+a:hover .logout {
+	opacity: 0.9;
+}
+
+a {
+	text-decoration: none;
+}

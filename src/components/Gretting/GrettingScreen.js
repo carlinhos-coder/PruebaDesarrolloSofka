@@ -5,10 +5,11 @@ import Swal from 'sweetalert2';
 import { getName, getNames, setName } from '../../helper/fetchApi';
 import { GetNames } from './GetNames';
 import { Loading } from './Loading';
+import { Navbar } from './Navbar';
 
 export const GrettingScreen = () => {
 
-    const [formValues, handleInputChange, reset, validateInput] = useForm();
+    const [formValues, handleInputChangeGretting, reset, validateInput] = useForm();
     const [check, setCheck] = useState("1");
     const [names, setNames] = useState([])
     const [changeComponent, setChangeComponent] = useState(true)
@@ -92,6 +93,7 @@ export const GrettingScreen = () => {
         "My name is:", "Mi nombre es:"
     ]
     return <div>
+        <Navbar />
         {changeComponent &&
             <div className="padre2">
                 <div className="hijo2">
@@ -107,7 +109,7 @@ export const GrettingScreen = () => {
                                 name="nombre"
                                 className="mt-10 input"
                                 autoComplete="off"
-                                onChange={handleInputChange}
+                                onChange={handleInputChangeGretting}
                                 value={formValues?.nombre ? formValues?.nombre : ""}
 
                             />

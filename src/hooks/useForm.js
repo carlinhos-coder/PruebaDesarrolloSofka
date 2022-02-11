@@ -13,7 +13,7 @@ export const useForm = (initialState = {}) => {
         setvalidateInput(true)
     }
 
-    const handleInputChange = ({ target }) => {
+    const handleInputChangeGretting = ({ target }) => {
         if (target.value.length && target.value !== "") {
             setvalidateInput(false)
         } else {
@@ -26,6 +26,6 @@ export const useForm = (initialState = {}) => {
 
     }
 
-    return [values, handleInputChange, reset, validateInput];
+    return [values, handleInputChangeGretting, reset, validateInput];
 
 }
